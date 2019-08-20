@@ -4,13 +4,21 @@
 #include<stdio.h>
 #include<math.h>
 
+
+/** DDA Line Algo parameter */
+
 float x1[10]={-450,-410,-450,-430,-410,-390},
 yy1[10]={-352,-440,-352,-395,-440,-480},
 x2[10]={450,410,-430,-410,-390,-370},
-y2[10]={-352,-440,-395,-440,-480,-520}; // includes left angles
-// right angles using one SP and EP
+y2[10]={-352,-440,-395,-440,-480,-520};
+
+
+/** Breshenham Line Algo. parameter */
+
 int bresh_x1[10]={-430,-390,-370,450}, bresh_y1[10]={-395,-480,-520,-352},
 bresh_x2[10]={430,390,370,370}, bresh_y2[10]={-395,-480,-520,-520};
+
+/** Text Rendering */
 
 char message[] = "Omor Ekushey";
 
@@ -23,6 +31,9 @@ void idle()
   glutPostRedisplay();
 }
 
+/** END Text Render */
+
+/** Circle Drawing Function */
 
 void circle() {
  glColor3f(1.0, 0.0, 0.0);
@@ -58,9 +69,9 @@ void circle() {
 
 
 
-//bresh begins
+/** Pixel insertion on display */
 
-void draw_pixel(int x, int y) {
+void visualizer(int x, int y) {
         glColor3f(1.0, 1.0, 1.0);
 		glBegin(GL_POINTS);
 		glVertex2i(x, y);
@@ -85,7 +96,7 @@ void draw_line(int bresh_x1, int bresh_x2, int bresh_y1, int bresh_y2) {
 	if (bresh_y2 < bresh_y1) incy = -1;
 	x = bresh_x1; y = bresh_y1;
 	if (dx > dy) {
-		draw_pixel(x, y);
+		visualizer(x, y);
 		e = 2 * dy-dx;
 		inc1 = 2*(dy-dx);
 		inc2 = 2*dy;
@@ -97,15 +108,13 @@ void draw_line(int bresh_x1, int bresh_x2, int bresh_y1, int bresh_y2) {
 			else
 				e += inc2;
 			x += incx;
-			draw_pixel(x, y);
+			visualizer(x, y);
 		}
 
 
 	} else {
-		draw_pixel(x, y);
-		e = 2*dx-dy;
-		inc1 = 2*(dx-dy);
-		inc2 = 2*dx;
+		visualizer(x, y);
+		e = 2*dx-dy;inc1 = 2*(dx-dy);inc2 = 2*dx;
 		for (i=0; i<dy; i++) {
 			if (e >= 0) {
 				x += incx;
@@ -114,25 +123,18 @@ void draw_line(int bresh_x1, int bresh_x2, int bresh_y1, int bresh_y2) {
 			else
 				e += inc2;
 			y += incy;
-			draw_pixel(x, y);
+			visualizer(x, y);
 		}
 	}
 }
-// bresham end here
-//cicle begins
+/** END Breshenham */
+
 
 
 
 void display()
 {
-
-
-
-
-
-
-
-    // bg color
+  /** Green Background Polygon */
  glColor3f(0.0007, 0.2, 0.1);
     glBegin(GL_POLYGON);
   glVertex2i(-450, 450);
@@ -143,100 +145,100 @@ void display()
 
 
 
-  // right last column
+  /** RIGHT COLUMN */
   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+  glBegin(GL_POLYGON);
   glVertex2i(300, -100);
   glVertex2i(400, -100);
   glVertex2i(400, -350);
   glVertex2i(300, -350);
  glEnd();
-
-    glColor3f(0.0007, 0.2, 0.1);
-    glBegin(GL_POLYGON);
+    // FAKE GREEN
+  glColor3f(0.0007, 0.2, 0.1);
+  glBegin(GL_POLYGON);
   glVertex2i(320, -120);
   glVertex2i(380, -120);
   glVertex2i(380, -350);
   glVertex2i(320, -350);
  glEnd();
 
-   // right 2nd last column
+  /** 2ND RIGHT COLUMN */
   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+  glBegin(GL_POLYGON);
   glVertex2i(150, 10);
   glVertex2i(250, 10);
   glVertex2i(250, -350);
   glVertex2i(150, -350);
  glEnd();
 
-    glColor3f(0.0007, 0.2, 0.1);
-    glBegin(GL_POLYGON);
+  glColor3f(0.0007, 0.2, 0.1);
+  glBegin(GL_POLYGON);
   glVertex2i(170, -10);
   glVertex2i(230, -10);
   glVertex2i(230, -350);
   glVertex2i(170, -350);
  glEnd();
 
- // left last column
+ /** LEFT COLUMN */
   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+  glBegin(GL_POLYGON);
   glVertex2i(-300, -100);
   glVertex2i(-400, -100);
   glVertex2i(-400, -350);
   glVertex2i(-300, -350);
  glEnd();
 
-    glColor3f(0.0007, 0.2, 0.1);
-    glBegin(GL_POLYGON);
+  glColor3f(0.0007, 0.2, 0.1);
+  glBegin(GL_POLYGON);
   glVertex2i(-320, -120);
   glVertex2i(-380, -120);
   glVertex2i(-380, -350);
   glVertex2i(-320, -350);
  glEnd();
 
-   // left 2nd last column
+   /** 2ND LEFT COLUMN */
   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+  glBegin(GL_POLYGON);
   glVertex2i(-150, 10);
   glVertex2i(-250, 10);
   glVertex2i(-250, -350);
   glVertex2i(-150, -350);
  glEnd();
 
-    glColor3f(0.0007, 0.2, 0.1);
-    glBegin(GL_POLYGON);
+  glColor3f(0.0007, 0.2, 0.1);
+  glBegin(GL_POLYGON);
   glVertex2i(-170, -10);
   glVertex2i(-230, -10);
   glVertex2i(-230, -350);
   glVertex2i(-170, -350);
  glEnd();
 
-   //circle
+ /** DRAW CIRCLE CALL */
   circle();
 
 
- // main frame
-//left
+/** MID LEFT COLUMN */
   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+  glBegin(GL_POLYGON);
   glVertex2i(-80, 50);
   glVertex2i(-60, 50);
   glVertex2i(-60, -350);
   glVertex2i(-80, -350);
 
  glEnd();
-//mid
-   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+
+/** MID MID COLUMN */
+  glColor3f(1.0, 1.0, 1.0);
+  glBegin(GL_POLYGON);
   glVertex2i(0, 250);
   glVertex2i(20, 250);
   glVertex2i(20, -350);
   glVertex2i(0, -350);
 
  glEnd();
-//right
-   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+/** MID RIGHT COLUMN */
+  glColor3f(1.0, 1.0, 1.0);
+  glBegin(GL_POLYGON);
   glVertex2i(90, 50);
   glVertex2i(70, 50);
   glVertex2i(70, -350);
@@ -244,7 +246,7 @@ void display()
 
  glEnd();
 
-//angle left
+/** ANGLE LEFT COLUMN */
  glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
   glVertex2i(-100, 250);
@@ -253,9 +255,9 @@ void display()
   glVertex2i(-80, 50);
 
  glEnd();
-//angle right right
-   glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+/** ANGLE RIGHT RIGHT COLUMN */
+  glColor3f(1.0, 1.0, 1.0);
+  glBegin(GL_POLYGON);
   glVertex2i(100,250);
   glVertex2i(120, 250);
   glVertex2i(90, 50);
@@ -263,9 +265,9 @@ void display()
 
  glEnd();
 
- // top bar
-    glColor3f(1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
+/** TOP BAR */
+  glColor3f(1.0, 1.0, 1.0);
+  glBegin(GL_POLYGON);
   glVertex2i(-100,250);
   glVertex2i(101, 250);
   glVertex2i(97, 230);
@@ -274,7 +276,7 @@ void display()
  glEnd();
 
 
-    // dda line starts here
+/** DDA BEGINS */
 int i;
 
 for(i=0;i<6;i++){
@@ -308,10 +310,10 @@ glBegin(GL_POINTS);
 glVertex2i(x,y);
 glEnd();
 }
-} // dda ends here
+} /** DDA END*/
 
 
-//bresh func
+/** BRESHENHAM */
 for(i=0;i<6;i++){
     draw_line(bresh_x1[i], bresh_x2[i], bresh_y1[i], bresh_y2[i]);
 }
@@ -321,8 +323,7 @@ for(i=0;i<6;i++){
 
 
 
-
-// text
+/** TEXT RENDER */
 
 
 glColor3f(.8, 0.0, 0.0);
