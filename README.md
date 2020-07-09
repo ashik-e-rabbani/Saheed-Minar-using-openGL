@@ -8,10 +8,16 @@ HOW TO RUN
 2. Now just click on build and run or  F9
 
 
+<img src='minar.JPG'>
+
 Coded By 
 --------
 
-Ashik Rabbani
+Ashik Rabbani,
+
+
 Daffodil International university
+
+
 Dhaka,Bangladesh
 
